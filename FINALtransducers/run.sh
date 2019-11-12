@@ -37,12 +37,17 @@ fstcompile --isymbols=syms.txt --osymbols=syms.txt  lemma2verbif.txt | fstarcsor
 fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait lemma2verbif.fst | dot -Tpdf  > lemma2verbif.pdf
 
 
-# Compila e gera a versão gráfica do lemma2verb
+# Gera a versão gráfica do lemma2verb
 fstunion lemma2verbip.fst lemma2verbis.fst > lemma2verbAUX.fst
-fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait lemma2verbAUX.fst | dot -Tpdf  > lemma2verbAUX.pdf
-
 fstunion lemma2verbAUX.fst lemma2verbif.fst > lemma2verb.fst
+rm lemma2verbAUX.fst || echo 'removal failed'
 fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait lemma2verb.fst | dot -Tpdf  > lemma2verb.pdf
+
+# Gera a versão gráfica do lemma2word
+fstunion lemma2verb.fst lemma2adverb.fst > lemma2wordAUX.fst
+fstunion lemma2wordAUX.fst lemma2noun.fst > lemma2word.fst
+rm lemma2wordAUX.fst || echo 'removal failed'
+fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait lemma2word.fst | dot -Tpdf  > lemma2word.pdf
 
 
 ################### Testa os tradutores ################
@@ -76,6 +81,13 @@ fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint
 
 
 echo "Transdutor lavar lemma2verbif :"
+fstrmepsilon lavar.fst | fsttopsort | fstprint --isymbols=syms.txt
+echo "Output: "
+fstcompose lavar.fst lemma2verbif.fst  > resultado.fst
+fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
+
+
+echo "Transdutor lavar lemma2verb :"
 fstrmepsilon lavar.fst | fsttopsort | fstprint --isymbols=syms.txt
 echo "Output: "
 fstcompose lavar.fst lemma2verbif.fst  > resultado.fst
