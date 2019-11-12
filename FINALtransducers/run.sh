@@ -11,6 +11,9 @@ fstcompile --isymbols=syms.txt --osymbols=syms.txt  aluno.txt | fstarcsort > alu
 fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait aluno.fst | dot -Tpdf  > aluno.pdf
 
 
+
+
+
 # Compila e gera a versão gráfica do lemma2adverb
 fstcompile --isymbols=syms.txt --osymbols=syms.txt  lemma2adverb.txt | fstarcsort > lemma2adverb.fst
 fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait lemma2adverb.fst | dot -Tpdf  > lemma2adverb.pdf
@@ -50,45 +53,50 @@ rm lemma2wordAUX.fst || echo 'removal failed'
 fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait lemma2word.fst | dot -Tpdf  > lemma2word.pdf
 
 
+##SAD TRY
+fstinvert lemma2word.fst > C.fst
+fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait c.fst | dot -Tpdf  > c.pdf
+
+
 ################### Testa os tradutores ################
 
-echo "Transdutor aluno :"
-fstrmepsilon aluno.fst | fsttopsort | fstprint --isymbols=syms.txt
-echo "Output: "
-fstcompose aluno.fst lemma2noun.fst  > resultado.fst
-fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
+# echo "Transdutor aluno :"
+# fstrmepsilon aluno.fst | fsttopsort | fstprint --isymbols=syms.txt
+# echo "Output: "
+# fstcompose aluno.fst lemma2noun.fst  > resultado.fst
+# fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
 
 
-echo "Transdutor inteligentemente :"
-fstrmepsilon inteligentemente.fst | fsttopsort | fstprint --isymbols=syms.txt
-echo "Output: "
-fstcompose inteligentemente.fst lemma2adverb.fst  > resultado.fst
-fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
+# echo "Transdutor inteligentemente :"
+# fstrmepsilon inteligentemente.fst | fsttopsort | fstprint --isymbols=syms.txt
+# echo "Output: "
+# fstcompose inteligentemente.fst lemma2adverb.fst  > resultado.fst
+# fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
 
 
-echo "Transdutor lavar lemma2verbip :"
-fstrmepsilon lavar.fst | fsttopsort | fstprint --isymbols=syms.txt
-echo "Output: "
-fstcompose lavar.fst lemma2verbip.fst  > resultado.fst
-fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
+# echo "Transdutor lavar lemma2verbip :"
+# fstrmepsilon lavar.fst | fsttopsort | fstprint --isymbols=syms.txt
+# echo "Output: "
+# fstcompose lavar.fst lemma2verbip.fst  > resultado.fst
+# fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
 
 
-echo "Transdutor lavar lemma2verbis :"
-fstrmepsilon lavar.fst | fsttopsort | fstprint --isymbols=syms.txt
-echo "Output: "
-fstcompose lavar.fst lemma2verbis.fst  > resultado.fst
-fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
+# echo "Transdutor lavar lemma2verbis :"
+# fstrmepsilon lavar.fst | fsttopsort | fstprint --isymbols=syms.txt
+# echo "Output: "
+# fstcompose lavar.fst lemma2verbis.fst  > resultado.fst
+# fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
 
 
-echo "Transdutor lavar lemma2verbif :"
-fstrmepsilon lavar.fst | fsttopsort | fstprint --isymbols=syms.txt
-echo "Output: "
-fstcompose lavar.fst lemma2verbif.fst  > resultado.fst
-fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
+# echo "Transdutor lavar lemma2verbif :"
+# fstrmepsilon lavar.fst | fsttopsort | fstprint --isymbols=syms.txt
+# echo "Output: "
+# fstcompose lavar.fst lemma2verbif.fst  > resultado.fst
+# fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
 
 
 echo "Transdutor lavar lemma2verb :"
 fstrmepsilon lavar.fst | fsttopsort | fstprint --isymbols=syms.txt
 echo "Output: "
-fstcompose lavar.fst lemma2verbif.fst  > resultado.fst
+fstcompose lavar.fst lemma2verb.fst  > resultado.fst
 fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
