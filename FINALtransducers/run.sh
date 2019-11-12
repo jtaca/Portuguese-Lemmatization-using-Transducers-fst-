@@ -29,6 +29,12 @@ fstcompile --isymbols=syms.txt --osymbols=syms.txt  lavar.txt | fstarcsort > lav
 fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait lavar.fst | dot -Tpdf  > lavar.pdf
 
 
+
+# Compila e gera a versão gráfica do lemma2verbis
+fstcompile --isymbols=syms.txt --osymbols=syms.txt  lemma2verbis.txt | fstarcsort > lemma2verbis.fst
+fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait lemma2verbis.fst | dot -Tpdf  > lemma2verbis.pdf
+
+
 ################### Testa os tradutores ################
 
 echo "Transdutor aluno :"
@@ -45,9 +51,16 @@ fstcompose inteligentemente.fst lemma2adverb.fst  > resultado.fst
 fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
 
 
-echo "Transdutor lavar :"
+echo "Transdutor lavar lemma2verbip :"
 fstrmepsilon lavar.fst | fsttopsort | fstprint --isymbols=syms.txt
 echo "Output: "
 fstcompose lavar.fst lemma2verbip.fst  > resultado.fst
+fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
+
+
+echo "Transdutor lavar lemma2verbis :"
+fstrmepsilon lavar.fst | fsttopsort | fstprint --isymbols=syms.txt
+echo "Output: "
+fstcompose lavar.fst lemma2verbis.fst  > resultado.fst
 fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
 
