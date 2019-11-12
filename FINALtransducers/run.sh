@@ -53,9 +53,9 @@ rm lemma2wordAUX.fst || echo 'removal failed'
 fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait lemma2word.fst | dot -Tpdf  > lemma2word.pdf
 
 
-##SAD TRY
-fstinvert lemma2word.fst > C.fst
-fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait c.fst | dot -Tpdf  > c.pdf
+##Gera a versão gráfica do word2lemma
+fstinvert lemma2word.fst > word2lemma.fst
+fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait word2lemma.fst | dot -Tpdf  > word2lemma.pdf
 
 
 ################### Testa os tradutores ################
@@ -95,8 +95,15 @@ fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait c.fst | dot -Tpdf 
 # fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
 
 
-echo "Transdutor lavar lemma2verb :"
+echo "Transdutor lavar lemma2word :"
 fstrmepsilon lavar.fst | fsttopsort | fstprint --isymbols=syms.txt
 echo "Output: "
 fstcompose lavar.fst lemma2verb.fst  > resultado.fst
+fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
+
+
+echo "Transdutor lavar word2lemma :"
+fstrmepsilon lavar.fst | fsttopsort | fstprint --isymbols=syms.txt
+echo "Output: "
+fstcompose lavar.fst word2lemma.fst  > resultado.fst
 fstproject --project_output resultado.fst | fstrmepsilon | fsttopsort | fstprint --acceptor --isymbols=syms.txt | awk '{print $3}'
