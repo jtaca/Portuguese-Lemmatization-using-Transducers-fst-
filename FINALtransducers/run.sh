@@ -37,6 +37,14 @@ fstcompile --isymbols=syms.txt --osymbols=syms.txt  lemma2verbif.txt | fstarcsor
 fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait lemma2verbif.fst | dot -Tpdf  > lemma2verbif.pdf
 
 
+# Compila e gera a versão gráfica do lemma2verb
+fstunion lemma2verbip.fst lemma2verbis.fst > lemma2verbAUX.fst
+fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait lemma2verbAUX.fst | dot -Tpdf  > lemma2verbAUX.pdf
+
+fstunion lemma2verbAUX.fst lemma2verbif.fst > lemma2verb.fst
+fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait lemma2verb.fst | dot -Tpdf  > lemma2verb.pdf
+
+
 ################### Testa os tradutores ################
 
 echo "Transdutor aluno :"
