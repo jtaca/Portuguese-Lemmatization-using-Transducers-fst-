@@ -119,3 +119,15 @@ fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait test6_lemma2word.f
 fstcompose test6.fst FINALtransducers/word2lemma.fst  > test6_word2lemma.fst
 fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait test6_word2lemma.fst | dot -Tpdf  > FINALexamples/test6_word2lemma.pdf
 
+echo "Test Transdutor test7 :"
+fstcompile --isymbols=syms.txt --osymbols=syms.txt  test7.txt | fstarcsort > test7.fst
+fstrmepsilon test7.fst | fsttopsort | fstprint --isymbols=syms.txt
+#echo "lemma2verb"
+fstcompose test7.fst FINALtransducers/lemma2verb.fst  > test7_lemma2verb.fst
+fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait test7_lemma2verb.fst | dot -Tpdf  > FINALexamples/test7_lemma2verb.pdf
+#echo "lemma2word"
+fstcompose test7.fst FINALtransducers/lemma2word.fst  > test7_lemma2word.fst
+fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait test7_lemma2word.fst | dot -Tpdf  > FINALexamples/test7_lemma2word.pdf
+#echo "word2lemma"
+fstcompose test7.fst FINALtransducers/word2lemma.fst  > test7_word2lemma.fst
+fstdraw    --isymbols=syms.txt --osymbols=syms.txt --portrait test7_word2lemma.fst | dot -Tpdf  > FINALexamples/test7_word2lemma.pdf
