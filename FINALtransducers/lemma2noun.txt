@@ -28,7 +28,8 @@
 1	2	+N  eps
 2	4	+fs eps
 2   4   +fp s
-0   3   +N  eps
+0   5   o   o 
+5   3   +N  eps
 3   4   +ms eps
 3   4   +mp s
 4
